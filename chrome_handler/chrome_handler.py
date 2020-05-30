@@ -6,8 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from typing import Optional
 
-from .settings import CHROME_DRIVER_PATH
-
 
 class ChromeHandler:
     """Selenium + Chrome Driverのハンドラ
