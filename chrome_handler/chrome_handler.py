@@ -6,8 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from typing import Optional
 
-from .settings import CHROME_DRIVER_PATH
-
 
 class ChromeHandler:
     """Selenium + Chrome Driverのハンドラ
@@ -19,11 +17,11 @@ class ChromeHandler:
         is_browser (bool): ブラウザを実際に開くかどうか, 既定値: False
 
     """
-    def __init__(self, is_browser: bool = False, chrome_driver_path: Optional[str] = None) -> None:
+    def __init__(self, chrome_driver_path: str, is_browser: bool = False) -> None:
         """コンストラクタ
 
         Args:
-            chrome_driver_path (str): chrome driverが置かれているパス, 既定値: None
+            chrome_driver_path (str): chrome driverが置かれているパス
             is_browser (bool, optional): ブラウザを実際に開くかどうか, 既定値: False
 
         Returns:
@@ -40,17 +38,13 @@ class ChromeHandler:
         op.add_argument("--proxy-server='direct://'")
         op.add_argument("--proxy-bypass-list=*")
         op.add_argument("--start-maximized")
-        op.add_argument("--headless")
 
-        if CHROME_DRIVER_PATH is None:
-            chrome_driver_path = CHROME_DRIVER_PATH
+        if not is_browser:
+            op.add_argument("--headless")
 
-        if is_browser:
-            self.driver = webdriver.Chrome(chrome_driver_path)
-        else:
-            self.driver = webdriver.Chrome(
-                chrome_driver_path, options=op
-            )
+        self.driver = webdriver.Chrome(
+            chrome_driver_path, options=op
+        )
 
         self.soup = None
 
