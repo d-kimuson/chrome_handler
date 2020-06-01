@@ -40,12 +40,12 @@ class ChromeHandler:
         op.add_argument("--start-maximized")
 
         if not is_browser:
+            op.add_argument("--window-size=1920,1080")  # レスポンシブ対応ページ用
             op.add_argument("--headless")
 
         self.driver = webdriver.Chrome(
             chrome_driver_path, options=op
         )
-        self.driver.set_window_size(1200, 600)  # レスポンシブ対応ページ用
 
         self.soup = None
 
