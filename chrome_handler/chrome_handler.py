@@ -45,6 +45,7 @@ class ChromeHandler:
         self.driver = webdriver.Chrome(
             chrome_driver_path, options=op
         )
+        self.driver.set_window_size(1200, 600)  # レスポンシブ対応ページ用
 
         self.soup = None
 
