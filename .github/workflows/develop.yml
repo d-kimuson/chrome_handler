@@ -28,4 +28,4 @@ jobs:
         pipenv install --dev --ignore-pipfile
     - name: Run Tests
       run: |
-        py.test
+        pipenv run py.test
